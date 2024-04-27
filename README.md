@@ -20,7 +20,7 @@
     <br />
     <a href="https://github.com/TirsvadCLI/Python.Game.Blackjack"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/TirsvadCLI/Python.Game.Blackjack/images/screenshot01.png)">
+    <a href="https://github.com/TirsvadCLI/Python.Game.Blackjack/images/screenshot01.png">
         <img src="images/screenshot01.png" alt="screenshot" height="120">
     </a>
     <br />
