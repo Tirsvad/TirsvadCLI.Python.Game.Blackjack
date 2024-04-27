@@ -8,7 +8,15 @@ class Cards:
     # cards [name, icon, type]
     cards = []
 
-    def __init__(self):
+    def __init__(self, types: dict[str, int] = None):
+        """
+        Prepare deck of a´cards without jokers
+
+        Args:
+            types: Card type and it's value.
+        Examples: my_cards = Cards({"J": 11, "Q": 12, "K":13, "A": })
+        """
+
         self.types = {
             "2": 2,
             "3": 3,
@@ -22,14 +30,17 @@ class Cards:
             "J": 10,
             "Q": 10,
             "K": 10,
-            "A": 11
+            "A": 11,
         }
 
+        if types:
+            self.types.update(types)
+
         self.suits = {
-            "heart": {"icon": "\u2665", "color": "red"},
+            "heart": {"icon": "\033[91m\u2665\033[0m", "color": "red"},
             "spade": {"icon": "\u2660", "color": "black"},
-            "diamond": {"icon": "\u2666", "color": "black"},
-            "club": {"icon": "\u2663", "color": "black"}
+            "diamond": {"icon": "\033[94m\u2666\033[0m", "color": "blue"},
+            "club": {"icon": "\033[92m\u2663\033[0m", "color": "green"},
         }
 
         for suit in self.suits:
@@ -41,12 +52,29 @@ class Cards:
         self.generate_deck_of_cards()
 
     def generate_deck_of_cards(self, decks: int = 6):
+        """
+        Make stack of card of the card deck.
+        Default it use 6 deck of cards
+
+        :param decks: Number of decks to use. Default value 6
+        :return:
+        """
         for _ in range(1, decks):
             for suit in self.deck:
                 # for card_type in self.deck[suit]["types"]:
                 for card_type in self.deck[suit]["types"]:
-                    self.cards.append([suit, self.deck[suit]['icon'], card_type, self.deck[suit]["types"][card_type]])
+                    self.cards.append(
+                        [
+                            suit,
+                            self.deck[suit]["icon"],
+                            card_type,
+                            self.deck[suit]["types"][card_type],
+                        ]
+                    )
         shuffle(self.cards)
+
+    def get_numbers_of_cards_in_deck(self):
+        return len(self.cards)
 
 
 class BlackJack:
@@ -72,7 +100,7 @@ class BlackJack:
                 i += 1
         return score
 
-    def compare_score(self, user_score: int, dealer_score:int):
+    def compare_score(self, user_score: int, dealer_score: int):
         if user_score == dealer_score:
             return "Draw"
         elif dealer_score == 0:

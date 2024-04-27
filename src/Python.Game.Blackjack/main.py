@@ -1,6 +1,6 @@
-from art import logo
-import random
 from os import system, name
+
+from art import logo
 from blackjack import BlackJack
 
 
@@ -8,12 +8,12 @@ def logo_print():
     # define our clear function
     def clear():
         # for windows
-        if name == 'nt':
-            _ = system('cls')
+        if name == "nt":
+            _ = system("cls")
 
         # for mac and linux(here, os.name is 'posix')
         else:
-            _ = system('clear')
+            _ = system("clear")
 
     clear()
     print(logo)
@@ -61,12 +61,18 @@ def play_game():
         user_score = blackjack.calculate_score(user_cards)
         # print(user_score)
         computer_score = blackjack.calculate_score(computer_cards)
-        print(f"Your cards: {blackjack.output_user_card(user_cards)}, current score: {user_score}")
-        print(f"Computer's first card: {blackjack.output_user_card([computer_cards[0]])}")
+        print(
+            f"Your cards: {blackjack.output_user_card(user_cards)}, current score: {user_score}"
+        )
+        print(
+            f"Computer's first card: {blackjack.output_user_card([computer_cards[0]])}"
+        )
         if user_score == 0 or computer_score == 0 or user_score > 21:
             is_game_over = True
         else:
-            user_should_deal = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+            user_should_deal = input(
+                "Type 'y' to get another card, type 'n' to pass: "
+            ).lower()
             if user_should_deal == "y":
                 user_cards.append(blackjack.deal_card())
             else:
@@ -75,9 +81,14 @@ def play_game():
                     computer_score = blackjack.calculate_score(computer_cards)
                 is_game_over = True
 
-    print("\n" + blackjack.compare_score(user_score=user_score, dealer_score=computer_score))
+    print(
+        "\n"
+        + blackjack.compare_score(user_score=user_score, dealer_score=computer_score)
+    )
     print(f"your hand {blackjack.output_user_card(user_cards)} score {user_score}")
-    print(f"computer hand {blackjack.output_user_card(computer_cards)}  score {computer_score}")
+    print(
+        f"computer hand {blackjack.output_user_card(computer_cards)}  score {computer_score}"
+    )
     if input("\nDo you wish to play again? ").lower() == "y":
         play_game()
 
